@@ -1,43 +1,61 @@
-# DevOps Excellence Portfolio - LAMBARAA Abdellah
+# 🚀 DevOps Excellence Portfolio - LAMBARAA Abdellah
 
-## 🏗️ CI/CD Architecture
+Ce projet est une démonstration complète d'une chaîne **CI/CD (Intégration et Déploiement Continus)** automatisée, allant du développement frontend jusqu'au déploiement containerisé.
 
-This project uses a distributed Jenkins architecture:
-- **VM Jenkins (192.168.12.201)**: Orchestrates the pipeline.
-- **VM Arbiter (192.168.12.203)**: Acts as a Jenkins SSH Agent where Docker builds and deployments occur.
+## 🏗️ Architecture du Pipeline
+
+Le pipeline est orchestré par **Jenkins** fonctionnant dans un conteneur Docker. Il automatise chaque étape du cycle de vie de l'application.
 
 ```mermaid
 graph LR
-    A[GitHub Push] --> B[Jenkins Controller]
-    B --> C[Jenkins Agent: Arbiter]
-    C --> D[Docker Build]
-    D --> E[Docker Hub Push]
-    E --> F[Docker Run on Arbiter: Port 213]
+    A[💻 Push GitHub] --> B[⚙️ Jenkins Master]
+    B --> C[📦 Docker Build]
+    C --> D[💾 Docker Hub]
+    D --> E[🌐 Déploiement Local: Port 213]
 ```
 
-## 🚀 Key Features
+## 📸 Aperçu du Pipeline
+![Jenkins Pipeline Overview](jenkins_pipeline_overview.png)
+*Visualisation du succès de l'automatisation dans Jenkins.*
 
-- **Premium Design System**: Modern dark theme with glassmorphism and smooth animations.
-- **Advanced CI/CD Patterns**: Documentation of industrial-grade pipelines using Jenkins and GitHub Actions.
-- **Cloud Native Focus**: Demonstrations of Kubernetes orchestration and Docker optimization.
-- **Responsive Architecture**: Fully responsive design with an integrated mobile navigation system.
+## 🚀 Fonctionnalités Clés
 
-## 🛠️ Tech Stack
+- **Design Premium** : Interface moderne avec effet de verre (glassmorphism) et responsive design.
+- **Automatisation Totale** : Pipeline Jenkins intelligent qui gère le build et le push Docker.
+- **Sécurité** : Gestion des secrets (Docker Hub Token) via Jenkins Credentials.
+- **Optimisation** : Utilisation d'images Docker légères (`nginx:stable-alpine`).
 
-- **Frontend**: HTML5, Vanilla CSS3 (Custom Design System), JavaScript (ES6+).
-- **Automation**: Jenkins, GitHub Actions.
-- **Orchestration**: Docker, Kubernetes.
-- **Infrastructure**: Terraform, Ansible.
+## 🛠️ Installation & Configuration
 
-## 📈 Engineering Philosophy
+### 1. Prérequis
+- Docker Desktop installé et fonctionnel.
+- Un compte Docker Hub.
 
-"Automation First" – Bridging the gap between software development and IT operations through radical automation, continuous monitoring, and version-controlled infrastructure.
+### 2. Lancer Jenkins (Local)
+Utilisez la commande suivante pour démarrer Jenkins avec accès au moteur Docker de votre machine :
+```powershell
+docker run -d -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -v //var/run/docker.sock:/var/run/docker.sock --name jenkins-master jenkins/jenkins:lts
+```
 
-## 👨‍💻 Author
+### 3. Configurer l'Agent Docker
+À l'intérieur de Jenkins, pour permettre la construction d'images :
+```powershell
+docker exec -u 0 jenkins-master apt-get update
+docker exec -u 0 jenkins-master apt-get install -y docker.io
+docker exec -u 0 jenkins-master chmod 666 /var/run/docker.sock
+```
+
+## 🧰 Tech Stack
+
+- **Frontend** : HTML5, CSS3 (Custom Design System), JS ES6+.
+- **DevOps** : Jenkins, Docker, Git.
+- **Registry** : Docker Hub.
+
+## 👨‍💻 Auteur
 
 **LAMBARAA Abdellah**
-- Master BDCC Student - 2026
-- DevOps & Big Data Enthusiast
+- Étudiant Master BDCC - 2026
+- Passionné par le DevOps et le Cloud Native.
 
 ---
-*Built with precision, engineered for scale.*
+*Projet réalisé dans le cadre du module DevOps - Automatisation et Qualité Logicielle.*
