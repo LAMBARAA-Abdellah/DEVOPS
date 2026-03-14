@@ -1,6 +1,19 @@
 # DevOps Excellence Portfolio - LAMBARAA Abdellah
 
-This project is a premium DevOps engineering portfolio developed as part of the **Master BDCC** program. It showcases advanced CI/CD patterns, cloud-native architecture, and Infrastructure as Code (IaC) principles.
+## 🏗️ CI/CD Architecture
+
+This project uses a distributed Jenkins architecture:
+- **VM Jenkins (192.168.12.201)**: Orchestrates the pipeline.
+- **VM Arbiter (192.168.12.203)**: Acts as a Jenkins SSH Agent where Docker builds and deployments occur.
+
+```mermaid
+graph LR
+    A[GitHub Push] --> B[Jenkins Controller]
+    B --> C[Jenkins Agent: Arbiter]
+    C --> D[Docker Build]
+    D --> E[Docker Hub Push]
+    E --> F[Docker Run on Arbiter: Port 213]
+```
 
 ## 🚀 Key Features
 
