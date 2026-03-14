@@ -1,39 +1,22 @@
-(function () {
-  const menuBtn = document.getElementById("menuBtn");
-  const menu = document.getElementById("menu");
+document.addEventListener('DOMContentLoaded', () => {
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
 
-  if (menuBtn && menu) {
-    menuBtn.addEventListener("click", function () {
-      const isOpen = menu.classList.toggle("open");
-      menuBtn.setAttribute("aria-expanded", String(isOpen));
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
     });
 
-    menu.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        menu.classList.remove("open");
-        menuBtn.setAttribute("aria-expanded", "false");
+    // Close menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        navLinks.classList.remove('active');
       });
     });
   }
 
-  const revealNodes = document.querySelectorAll(".card, .timeline li");
-  revealNodes.forEach(function (el) {
-    el.classList.add("reveal");
-  });
-
-  const observer = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.12 }
-  );
-
-  revealNodes.forEach(function (el) {
-    observer.observe(el);
-  });
-})();
+  // Scroll reveal/animation logic could go here
+  console.log('DevOps Portfolio Initialized');
+});
