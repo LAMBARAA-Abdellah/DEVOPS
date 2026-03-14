@@ -2,7 +2,7 @@ pipeline {
     agent { label 'arbiter' }
 
     environment {
-        DOCKER_IMAGE = "iniqdev/dvp_01"
+        DOCKER_IMAGE = "abdellahlambaraa/devops-portfolio"
         DOCKER_TAG   = "${BUILD_NUMBER}"
         REGISTRY_CRED = "dockerhub-token"
     }
